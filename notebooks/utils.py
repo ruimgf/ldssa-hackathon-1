@@ -6,9 +6,13 @@ def read_and_process(_df):
 
 	_df['AmountRain']= _df[_df.DidRainToday=='Yes']['AmountRain'].replace(to_replace=np.nan,value=5.4)
 	_df['AmountRain']= _df[_df.DidRainToday=='No']['AmountRain'].replace(to_replace=np.nan,value=0)
+	_df['MorningHumidity']= _df[_df.DidRainToday=='Yes']['MorningHumidity'].replace(to_replace=np.nan,value=5.4)
+	_df['MorningHumidity']= _df[_df.DidRainToday=='No']['MorningHumidity'].replace(to_replace=np.nan,value=0)
+	_df['AfternoonHumidity']= _df[_df.DidRainToday=='Yes']['AfternoonHumidity'].replace(to_replace=np.nan,value=5.4)
+	_df['AfternoonHumidity']= _df[_df.DidRainToday=='No']['AfternoonHumidity'].replace(to_replace=np.nan,value=0)
 	_df['Season'] = _df.apply(create_season,axis=1)
 	_df_season = _df.groupby(['Season']).median()
-	
+
 	_df = _df.drop(columns=['ID','DidRainToday','AfternoonWindDir','StrongWindDir'])
 	
 	
@@ -19,12 +23,12 @@ def read_and_process(_df):
 	
 	_df = _df.assign(MorningWindDir=_df['MorningWindDir'].astype('category'))
 	_df = pd.get_dummies(_df)
-	_df['MorningTemp'] = _df.apply(replace_na_median_season,args=(_df_season,'MorningTemp'),axis=1)
+	#_df['MorningTemp'] = _df.apply(replace_na_median_season,args=(_df_season,'MorningTemp'),axis=1)
 	#_df['AfternoonTemp'] = _df.apply(replace_na_median_season,args=(_df_season,'AfternoonTemp'),axis=1)
 	#_df['MorningHumidity'] = _df.apply(replace_na_median_season,args=(_df_season,'MorningHumidity'),axis=1)
 	#_df['AfternoonHumidity'] = _df.apply(replace_na_median_season,args=(_df_season,'AfternoonHumidity'),axis=1)
 
-	_df = _df.fillna(_df.median())
+	#_df = _df.fillna(_df.median())
 	#_df['yesterday_rain'] = _df.apply(compute_yesterday_amount_rain,args=(_df,),axis=1)
 	
 	_df['diff_temp'] = _df['AfternoonTemp'] - _df['MorningTemp']
