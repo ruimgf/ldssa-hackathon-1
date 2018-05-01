@@ -5,7 +5,6 @@ We have got a final AUC Score of 0.881.
 ## Objectives
 The objective of this hackathon is to predict if it will rain tomorrow. 
 
-However, what you should really think about is to apply the Data Science tools you learned in the last two days of the Lisbon Data Science Starters Academy. It is encouraged to get to a great classifier performance, but the data science workflow will be heavily evaluated. Each team will present their findings at the end of the challenge in a short pitch.
 ## Data Dictionary
 - AmountRain: The amount of rainfall recorded for the day in mm;
 - StrongWindDir: The direction of the strongest wind gust in the 24 hours to midnight;
